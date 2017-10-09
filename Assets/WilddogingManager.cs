@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using GameFramework;
-using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityGameFramework.Runtime;
@@ -59,6 +58,10 @@ public class WilddogingManager : MonoBehaviour
 	{
 		StartCoroutine(_putStream(path, data));
 	}
+	public void PutStream(string path,string data)
+	{
+		StartCoroutine(_putStream(path, data));
+	}
 	
 	private IEnumerator _getStream(string path,OnWilddogingMes onRes)
 	{
@@ -71,6 +74,12 @@ public class WilddogingManager : MonoBehaviour
 	private IEnumerator _putStream(string path, Dictionary<string,object> data)
 	{
 		WWW www = new WWW(url + path,Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data)),putHeaders);
+		yield return www;
+	}
+	
+	private IEnumerator _putStream(string path, string data)
+	{
+		WWW www = new WWW(url + path,Encoding.UTF8.GetBytes(data),putHeaders);
 		yield return www;
 	}
 	

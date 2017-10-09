@@ -50,7 +50,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CollectionUI.cs" />
     <Compile Include="Assets\EmptyProject\ProcedureLaunch.cs" />
+    <Compile Include="Assets\EventManager.cs" />
     <Compile Include="Assets\GameFramework\Scripts\Runtime\Base\BaseComponent.cs" />
     <Compile Include="Assets\GameFramework\Scripts\Runtime\Base\GameEntry.cs" />
     <Compile Include="Assets\GameFramework\Scripts\Runtime\Base\GameFrameworkComponent.cs" />
@@ -233,6 +235,11 @@
     <Compile Include="Assets\GameFramework\Scripts\Runtime\WebRequest\WWWFormInfo.cs" />
     <Compile Include="Assets\GameFramework\Scripts\Runtime\WebRequest\WebRequestAgentHelperBase.cs" />
     <Compile Include="Assets\GameFramework\Scripts\Runtime\WebRequest\WebRequestComponent.cs" />
+    <Compile Include="Assets\HintUI.cs" />
+    <Compile Include="Assets\ItemObject.cs" />
+    <Compile Include="Assets\ItemObjectManager.cs" />
+    <Compile Include="Assets\PlayerManager.cs" />
+    <Compile Include="Assets\PlayerMove.cs" />
     <Compile Include="Assets\WilddogingManager.cs" />
     <Compile Include="Assets\testManager.cs" />
     <None Include="Assets\GameFramework\Libraries\link.xml" />

@@ -44,16 +44,25 @@ public class MVector3
 public class testManager : MonoBehaviour
 {
 
+	public GameObject playerPrefab;
+
+	public GameObject otherPrefab;
+	
 	Dictionary<string,object> localUserInfo = new Dictionary<string, object>();
 	Dictionary<string,Transform> userTransforms = new Dictionary<string, Transform>();
 	private Transform localTransform;
+	
+	
 
 	// Use this for initialization
 	private void Start()
 	{
 		localUserInfo["name"] = Random.Range(0, 100000).ToString();
-		localUserInfo["positon"] = new MVector3(Random.Range(-5f, 5f), 5, Random.Range(-5f, 5f));
-		
+		MVector3 pos = new MVector3(Random.Range(-5f, 5f), 5, Random.Range(-5f, 5f));
+
+		localUserInfo["positon"] = pos;
+		localTransform = Instantiate(playerPrefab).transform;
+		localTransform.position = pos.ToVector3();
 	}
 
 	// Update is called once per frame
@@ -76,7 +85,7 @@ public class testManager : MonoBehaviour
 						Transform trans = null;
 						if(!userTransforms.ContainsKey(player.Key))
 						{
-							GameObject ga = new GameObject(player.Key);
+							GameObject ga = Instantiate(otherPrefab);
 							trans = ga.transform;
 							userTransforms.Add(player.Key,trans);
 						}
@@ -84,10 +93,12 @@ public class testManager : MonoBehaviour
 						{
 							trans = userTransforms[player.Key];
 						}
-						trans.position = pos.ToVector3();
+						Vector3 v3 = pos.ToVector3();
+						trans.position = Vector3.MoveTowards(trans.position, v3, 10 * Time.deltaTime);
 					}
 				}
 			}
+			localUserInfo["positon"] = MVector3.Parse(localTransform.position);
 			WilddogingManager.Instance.PutStream("users/" + localUserInfo["name"] + ".json", localUserInfo);
 		});
 	}
